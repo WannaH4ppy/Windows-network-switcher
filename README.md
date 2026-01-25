@@ -19,7 +19,7 @@ Prepares the computer for work in an isolated network (e.g., connected via a swi
 
     Disables Windows Firewall for the Public network profile.
 
-        Goal: To enable PING and communication within a network that Windows defaults to blocking as "Unidentified/Public".
+    Goal: To enable PING and communication within a network that Windows defaults to blocking as "Unidentified/Public".
 
 2. Internet/Home Mode (LAB_OFF.bat)
 
@@ -44,11 +44,12 @@ How to edit?
 What needs to be changed? In both files, locate the lines responsible for the interface name and IP address.
 1. Network Interface Name
 
-Windows assigns various names to network adapters (e.g., "Ethernet", "Ethernet 2", "Local Area Connection"). Check your specific name in Control Panel -> Network Connections and replace it in the script:
-Fragment kodu
+Windows assigns various names to network adapters (e.g., "Ethernet", "Ethernet 2", "Local Area Connection"). 
+Check your specific name in Control Panel -> Network Connections and replace it in the script:
 
-:: Example of changing the name from "Ethernet" to "Ethernet 2"
-netsh interface ip set address name="Ethernet 2" ...
+
+Example of changing the name from "Ethernet" to "Ethernet 2"
+netsh interface ip set address name="Ethernet 2"
 
 ⚠️ Warning
 
@@ -56,11 +57,14 @@ The LAB_START.bat script disables the Windows Firewall for the public profile.
 
     Use this mode only in a trusted local network (e.g., your own disconnected switch).
 
-    Remember to always run LAB_OFF.bat after finishing your work to restore protection before reconnecting to public Wi-Fi or the Internet.
+    Remember to always run LAB_OFF.bat after finishing your work to restore protection before 
+    
+    reconnecting to public Wi-Fi or the Internet.
 
 ⚠️ Requirements
 
     Operating System: Windows 10 / 11
 
     Permissions: Administrator privileges (the script will request them automatically).
+
 
