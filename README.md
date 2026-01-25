@@ -3,6 +3,7 @@
 A simple and effective tool (.bat) for rapidly switching network configurations on Windows.
 
 This project was created to automate workflows in laboratory environments that require frequent transitions between a home network (Wi-Fi + DHCP) and an isolated local network via cable (Static IP + Switch), which requires specific firewall settings.
+
 ⚠️ Features
 
 The tool consists of two scripts performing opposite tasks:
@@ -62,3 +63,4 @@ The LAB_START.bat script disables the Windows Firewall for the public profile.
     Operating System: Windows 10 / 11
 
     Permissions: Administrator privileges (the script will request them automatically).
+
