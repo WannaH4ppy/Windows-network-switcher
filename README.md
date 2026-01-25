@@ -1,59 +1,64 @@
-# ⚠️ Windows Network Lab Switcher
+⚠️ Windows Network Lab Switcher
 
-Proste i skuteczne narzędzie (`.bat`) do szybkiego przełączania konfiguracji sieciowej w systemie Windows. 
+A simple and effective tool (.bat) for rapidly switching network configurations on Windows.
 
-Projekt powstał w celu automatyzacji pracy w środowisku laboratoryjnym, gdzie konieczne jest częste przełączanie 
-się między siecią domową (Wi-Fi + DHCP) a izolowaną siecią lokalną na kablu (Static IP + Switch), która wymaga 
-specyficznych ustawień zapory.
--------------------------------------------------------------------------------------
-## ⚠️ Funkcjonalności
+This project was created to automate workflows in laboratory environments that require frequent transitions between a home network (Wi-Fi + DHCP) and an isolated local network via cable (Static IP + Switch), which requires specific firewall settings.
+⚠️ Features
 
-Narzędzie składa się z dwóch skryptów realizujących przeciwstawne zadania:
+The tool consists of two scripts performing opposite tasks:
+1. Lab Mode (LAB_ON.bat)
 
-### 1. Tryb Laboratoryjny (`LAB_ON.bat`)
-Ten skrypt przygotowuje komputer do pracy w izolowanej sieci (np. spiętej switchem bez routera):
-* **Wymusza uprawnienia Administratora**.
-* **Wyłącza kartę Wi-Fi**, aby uniknąć konfliktów routingu i "dwóch bram".
-* **Ustawia statyczny adres IP** na karcie Ethernet (domyślnie `192.168.1.10` lub `192.168.1.11`).
-* **Wyłącza Zaporę Windows (Firewall)** dla profilu sieci publicznej.
-    * *Cel:* Umożliwienie działania polecenia `PING` i komunikacji w sieci, którą Windows domyślnie blokuje jako
-    * "Niezidentyfikowaną/Publiczną".
+Prepares the computer for work in an isolated network (e.g., connected via a switch without a router):
 
-### 2. Tryb Internet/Dom (`LAB_OFF.bat`)
-Ten skrypt przywraca ustawienia do codziennego użytku:
-* **Włącza kartę Wi-Fi**.
-* **Przywraca pobieranie adresu IP z DHCP** na karcie Ethernet (automatycznie).
-* **Włącza z powrotem Zaporę Windows** dla sieci publicznych (dla bezpieczeństwa).
--------------------------------------------------------------------------------------
-## ⚠️ Konfiguracja i Edycja
+    Forces Administrator privileges.
 
-Przed pierwszym użyciem należy dostosować skrypty do swojego sprzętu.
+    Disables the Wi-Fi adapter to avoid routing conflicts and "double gateway" issues.
 
-### Jak edytować?
-1. Kliknij na plik `.bat` prawym przyciskiem myszy.
-2. Wybierz opcję **Edytuj** (lub "Otwórz za pomocą" -> Notatnik).
+    Sets a static IP address on the Ethernet adapter (default: 192.168.1.10 or 192.168.1.11).
 
-### Co należy zmienić?
+    Disables Windows Firewall for the Public network profile.
 
-W obu plikach znajdź linijki odpowiedzialne za nazwę interfejsu oraz adres IP.
+        Goal: To enable PING and communication within a network that Windows defaults to blocking as "Unidentified/Public".
 
-#### 1. Nazwa Karty Sieciowej
-Windows różnie nazywa karty (np. "Ethernet", "Ethernet 2", "Połączenie lokalne"). 
-Sprawdź swoją nazwę w `Panel sterowania -> Połączenia sieciowe` i podmień ją w skrypcie:
+2. Internet/Home Mode (LAB_OFF.bat)
 
-```batch
-:: Przykład zmiany nazwy z "Ethernet" na "Ethernet 2"
+Restores settings for daily use:
+
+    Enables the Wi-Fi adapter.
+
+    Restores DHCP (automatic IP assignment) on the Ethernet adapter.
+
+    Re-enables Windows Firewall for public networks (for security).
+
+⚠️ Configuration & Customization
+
+Before the first use, you must adapt the scripts to your specific hardware.
+
+How to edit?
+
+    Right-click on the .bat file.
+
+    Select Edit (or "Open with" -> Notepad).
+
+What needs to be changed? In both files, locate the lines responsible for the interface name and IP address.
+1. Network Interface Name
+
+Windows assigns various names to network adapters (e.g., "Ethernet", "Ethernet 2", "Local Area Connection"). Check your specific name in Control Panel -> Network Connections and replace it in the script:
+Fragment kodu
+
+:: Example of changing the name from "Ethernet" to "Ethernet 2"
 netsh interface ip set address name="Ethernet 2" ...
-```
 
-## ⚠️ Ostrzeżenie
+⚠️ Warning
 
-Skrypt LAB_START.bat wyłącza zaporę sieciową (Firewall) dla profilu publicznego.
+The LAB_START.bat script disables the Windows Firewall for the public profile.
 
-Używaj tego trybu tylko w zaufanej sieci lokalnej (np. własny switch w domu).
-Pamiętaj, aby zawsze użyć LAB_OFF.bat po zakończeniu pracy, aby przywrócić ochronę przed podłączeniem się do publicznego Wi-Fi.
+    Use this mode only in a trusted local network (e.g., your own disconnected switch).
 
-## ⚠️ Wymagania
+    Remember to always run LAB_OFF.bat after finishing your work to restore protection before reconnecting to public Wi-Fi or the Internet.
 
-System operacyjny: Windows 10 / 11
-Uprawnienia Administratora (skrypt sam o nie poprosi).
+⚠️ Requirements
+
+    Operating System: Windows 10 / 11
+
+    Permissions: Administrator privileges (the script will request them automatically).
